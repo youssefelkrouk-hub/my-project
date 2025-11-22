@@ -4,7 +4,12 @@ class Person:
         self.age=age
     def __repr__(self):
         return f"{self.name} est d'age de {self.age} ans "
-    
+    def __eq__(self,other):
+        return (self.name==other.name and self.age==other.age) 
 
-pesro_1=Person("youssef",21)
-print(pesro_1) 
+
+perso=Person("Youssef",21)
+perso_2=Person("Youssef",33)
+print(perso_2)
+print(perso) 
+print(perso==perso_2)
