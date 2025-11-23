@@ -7,6 +7,13 @@ class Person:
     def __eq__(self,other):
         return (self.name==other.name and self.age==other.age) 
 
+
+print("==========dunder functrion ========")
+perso=Person("Youssef",21)
+perso_2=Person("Youssef",33)
+print(perso_2)
+print(perso) 
+print(perso==perso_2)
 # Définition des exceptions
 # class SalaryError(ValueError):
 #     pass
@@ -54,31 +61,68 @@ class Person:
 # except SalaryError:
 #     print("SalaryError caught")
 
-class Parent:
-    def talk(self):
-        print("Parent talking!")     
+# class Parent:
+#     def talk(self):
+#         print("Parent talking!")     
 
-class Child(Parent):
-    def talk(self):
-        print("Child talking!")          
+# class Child(Parent):
+#     def talk(self):
+#         print("Child talking!")          
 
-class TalkativeChild(Parent):
-    def talk(self):
-        print("TalkativeChild talking!")
-        Parent.talk(self)
-
-
-p, c, tc = Parent(), Child(), TalkativeChild()
-
-for obj in (p, c, tc):
-    obj.talk()
+# class TalkativeChild(Parent):
+#     def talk(self):
+#         print("TalkativeChild talking!")
+#         Parent.talk(self)
 
 
+# p, c, tc = Parent(), Child(), TalkativeChild()
 
+# for obj in (p, c, tc):
+#     obj.talk()
 
+# class Rectangle:
+#     def __init__(self, w, h):
+#         self._w = w
+#         self._h = h
+#     def get(self):
+#         return self._h , self._w
+#     def set(self,new_h,new_w):
+#         self._h=new_h
+#         self._w=new_w
+#     @property
+#     def area(self):
+#         return self._w * self._h
+# rect = Rectangle(100,1000) 
+# rect.set(20,30)
+# print(rect.get())
+# print(rect.area)   # 50 (appel comme un attribut, pas une méthode)
+# class Customer:
+#     def __init__(self, name, new_bal):
+#         self.name = name
+#         if new_bal < 0:
+#             raise ValueError("Balance cannot be negative")
+#         self._balance = new_bal
+#     # Getter: expose _balance comme une propriété
+#     @property
+#     def balance(self):
+#         return self._balance
+#     # Setter: permet de modifier _balance avec validation
+#     @balance.setter
+#     def balance(self, value):
+#          if value < 0:
+#              raise ValueError("Balance cannot be negative")
+#          print("Setter method is called")
+#          self._balance = value
+#     # @property
+#     def prod(self):
+#         return (self._balance)**2     
 
-# perso=Person("Youssef",21)
-# perso_2=Person("Youssef",33)
-# print(perso_2)
-# print(perso) 
-# print(perso==perso_2)
+# cust = Customer("Youssef", 100)
+# print(cust.balance)   # 100
+# cust.balance = 2    # Setter method is called
+# print(cust.balance)   # 22
+# print(cust) 
+# cust.balance = 50    # ValueError: Balance cannot be negative
+# print(cust.balance)
+# cust.balance=22222
+# print(cust.balance)
