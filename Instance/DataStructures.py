@@ -202,6 +202,7 @@ printer.print_documents()
 # print("File vide ?", printer.queue.empty())  # True
 
 # Classe Queue simplifiée
+
 class Queue:
     def __init__(self):
         self.items = []
@@ -240,7 +241,6 @@ class Printertalks:
         while self.queue.has_elements():
             print("Printing", self.queue.dequeue())
 
-
 printer = Printertalks()
 printer.add_document("Youssef El krouk ")
 printer.add_document("Mouad Belhass")
@@ -248,14 +248,121 @@ printer.print_documents()
 
 
 
+
+
+# from queue import SimpleQueue
+
+# # Créez la file d'attente.
+# my_orders_queue = SimpleQueue()
+
+# # Ajouter un élément à la file d'attente.
+# my_orders_queue.put("Commande 1: Pizza")
+
+# # Retirer un élément de la file d'attente.
+# order = my_orders_queue.get()
+# print(order)
+
+
+# from queue import Queue
+
+# q = Queue(maxsize=2)
+# q.put("A")
+# q.put("B")
+# print(q.get())  # A
+# #====== La biblio SimpleQueue est plus restrient que queue ============#
+# from queue import SimpleQueue
+# sq = SimpleQueue()
+# sq.put("A")
+# sq.put("B")
+# print(sq.get())  # A
+
+print("================ Graphs Impelimentation  =======================\n")
+
     
+class Graph:
+    def __init__(self):
+        self.vertices={}
+    def add_vertex(self,vertex):
+        self.vertices[vertex]=[]
+    def  add_edge(self, source, *args):
+        self.vertices[source].append(args)
+    def display(self):
+        for key,value in self.vertices.items():
+            for t in value:
+                print(f"les amis proche de {key} sont {t}")
 
 
 
+my_graph = Graph() 
+my_graph.add_vertex('David') 
+my_graph.add_vertex('Miriam') 
+my_graph.add_vertex('Martin') 
+my_graph.add_edge('David', 'Miriam','Youssef','Ilham') 
+my_graph.add_edge('Miriam','HHHH')
+my_graph.add_edge('Miriam', 'Martin') 
+my_graph.add_edge('Martin','Emly')
+print(my_graph.vertices)
+my_graph.display()
+
+print("======================== Recursion ========================")
+
+
+#par  memoisation 
+cache = [None]*(100)
+def fibonacci(n): 
+    if n <= 1:
+        return n
+    # Check if the value exists
+    if cache[n] is None:
+        # Save the result in cache
+        cache[n] = fibonacci(n-1) + fibonacci(n-2)
+    return cache[n]
+    
+print(fibonacci(3))
+
+print("================== Tour de Hanoi ==========================")
+
+def hanoi(nb_disques, source, destination, intermediaire):
+    # Cas de base : un seul disque
+    if nb_disques == 1:
+        print(f"Déplacer le disque 1 de {source} vers {destination}")
+        return
+    # Déplacer n-1 disques vers la tige intermédiaire
+    hanoi(nb_disques - 1, source, intermediaire, destination)
+    # Déplacer le disque restant vers la tige destination
+    print(f"Déplacer le disque {nb_disques} de {source} vers {destination}")
+    # Déplacer les n-1 disques de la tige intermédiaire vers la tige destination
+    hanoi(nb_disques - 1, intermediaire, destination, source)
+
+# Exemple
+nb_disques = 4
+source = 'A'
+intermediaire = 'B'
+destination = 'C'
+hanoi(nb_disques, source, destination, intermediaire)
 
 
 
+print("=============== Binary Search ==============")
+def binary_search(ordered_list, search_value):
+    first = 0
+    last = len(ordered_list) - 1
+    
+    while first <= last:
+        middle = (first + last) // 2
+        # Vérifier si la valeur recherchée est au milieu
+        if search_value == ordered_list[middle]:
+            return True
+        # Vérifier si la valeur recherchée est plus petite que celle au milieu
+        elif search_value < ordered_list[middle]:
+            # Réduire la borne supérieure
+            last = middle - 1
+        else:
+            # Augmenter la borne inférieure
+            first = middle + 1
+    return False
 
+print(binary_search([1, 5, 8, 9, 15, 20, 70, 72], 5))  # Résultat attendu : True
 
 
 
