@@ -250,31 +250,31 @@ printer.print_documents()
 
 
 
-# from queue import SimpleQueue
+from queue import SimpleQueue
 
-# # Créez la file d'attente.
-# my_orders_queue = SimpleQueue()
+# Créez la file d'attente.
+my_orders_queue = SimpleQueue()
 
-# # Ajouter un élément à la file d'attente.
-# my_orders_queue.put("Commande 1: Pizza")
+# Ajouter un élément à la file d'attente.
+my_orders_queue.put("Commande 1: Pizza")
 
-# # Retirer un élément de la file d'attente.
-# order = my_orders_queue.get()
-# print(order)
+# Retirer un élément de la file d'attente.
+order = my_orders_queue.get()
+print(order)
 
 
-# from queue import Queue
+from queue import Queue
 
-# q = Queue(maxsize=2)
-# q.put("A")
-# q.put("B")
-# print(q.get())  # A
-# #====== La biblio SimpleQueue est plus restrient que queue ============#
-# from queue import SimpleQueue
-# sq = SimpleQueue()
-# sq.put("A")
-# sq.put("B")
-# print(sq.get())  # A
+q = Queue(maxsize=2)
+q.put("A")
+q.put("B")
+print(q.get())  # A
+#====== La biblio SimpleQueue est plus restrient que queue ============#
+from queue import SimpleQueue
+sq = SimpleQueue()
+sq.put("A")
+sq.put("B")
+print(sq.get())  # A
 
 print("================ Graphs Impelimentation  =======================\n")
 
@@ -343,7 +343,7 @@ hanoi(nb_disques, source, destination, intermediaire)
 
 
 
-print("=============== Binary Search ==============")
+print("===============Binary Search iterative  de complexité logarithmique O(log(x))==============")
 def binary_search(ordered_list, search_value):
     first = 0
     last = len(ordered_list) - 1
@@ -363,6 +363,27 @@ def binary_search(ordered_list, search_value):
     return False
 
 print(binary_search([1, 5, 8, 9, 15, 20, 70, 72], 5))  # Résultat attendu : True
+
+print("===============Binary Search Recurrsive==============")
+
+def binary_search_recursive(ordered_list, search_value):
+  # Define the base case
+  if len(ordered_list) == 0:
+    return False
+  else:
+    middle = len(ordered_list)//2
+    # Check whether the search value equals the value in the middle
+    if search_value == ordered_list[middle]:
+        return True
+    elif search_value < ordered_list[middle]:
+        # Call recursively with the left half of the list
+        return binary_search_recursive(ordered_list[:middle], search_value)
+    else:
+        # Call recursively with the right half of the list
+        return binary_search_recursive(ordered_list[middle+1:],search_value) 
+print(binary_search_recursive([1,5,8,9,15,20,70,72], 5))
+
+print("Depth-First Search (DFS) : Parcours en profondeur d'un graphe")
 
 
 

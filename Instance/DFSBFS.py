@@ -108,12 +108,12 @@ def Searche(self,search_value):
 # print("Searching for 7 in the BST:", Searche(bst, 7))  # Output: True
 
 
-
+print("Finding Minimum and Maximum in a Binary Search Tree")
 class TreeNode:
-    def __init__(self, data):
+    def __init__(self, data,left_child=None,right_child=None):
         self.data = data
-        self.left_child = None
-        self.right_child = None
+        self.left_child = left_child
+        self.right_child = right_child 
 
 class BinarySearchTree:
     def __init__(self):
@@ -126,6 +126,11 @@ class BinarySearchTree:
         while current_node.left_child:
             current_node = current_node.left_child
         return current_node.data
+    def find_max(self):
+        cr=self.root
+        while cr.right_child :
+            cr=cr.right_child
+        return cr.data
 
 # Exemple : création d'un arbre
 def CreateTree():
@@ -136,8 +141,148 @@ def CreateTree():
     bst.root.left_child.left_child = TreeNode(20)
     bst.root.left_child.right_child = TreeNode(40)
     bst.root.right_child.left_child = TreeNode(60)
-    bst.root.right_child.right_child = TreeNode(80)
+    bst.root.right_child.right_child = TreeNode(1000)
     return bst
 
 bst = CreateTree()
 print(bst.find_min())  # Résultat attendu : 20
+print(bst.find_max())  # Résultat attendu : 80
+
+
+print("In-Order Traversal of a Binary Search Tree\n")
+
+class TreeNode:  
+    def __init__(self, data, left=None, right=None):
+        self.data = data
+        self.left_child = left
+        self.right_child = right
+
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+
+    def in_order(self, current_node):
+        # Vérifier si le nœud existe
+        if current_node:
+            # Parcourir récursivement le sous-arbre gauche
+            self.in_order(current_node.left_child)
+            
+            # Afficher la valeur du nœud courant
+            print(current_node.data)
+    
+            # Parcourir récursivement le sous-arbre droit
+            self.in_order(current_node.right_child)
+    def in_desorde(self,current_node):
+        if current_node:
+            #parcourir le sous arbre droite
+            self.in_desorde(current_node.right_child)
+            print(current_node.data)
+            self.in_desorde(current_node.left_child)
+
+    @staticmethod
+    def CreateTree():
+        bst = BinarySearchTree()
+        bst.root = TreeNode(50)
+        bst.root.left_child = TreeNode(30)
+        bst.root.right_child = TreeNode(70)
+        bst.root.left_child.left_child = TreeNode(20)
+        bst.root.left_child.right_child = TreeNode(40)
+        bst.root.right_child.left_child = TreeNode(60)
+        bst.root.right_child.right_child = TreeNode(1000)
+        return bst
+
+#creation
+bst = CreateTree()
+
+# Parcours en ordre
+bst.in_order(bst.root)
+print("In-Desorder Traversal of a Binary Search Tree")
+bst.in_desorde(bst.root)
+
+print("Pre-Order Traversal of an Expression Tree\n")
+
+
+class TreeNode:
+    def __init__(self, data, left=None, right=None):
+        self.data = data
+        self.left_child = left
+        self.right_child = right
+
+
+class ExpressionTree:
+    def __init__(self):
+        self.root = None
+
+    def pre_order(self, current_node):
+        # Vérifier si le nœud existe
+        if current_node:
+            # Afficher la valeur du nœud courant
+            print(current_node.data)
+            # Appeler récursivement sur le sous-arbre gauche
+            self.pre_order(current_node.left_child)
+            # Appeler récursivement sur le sous-arbre droit
+            self.pre_order(current_node.right_child)
+
+
+# Exemple : construire un petit arbre d'expression
+def CreateExpressionTree():
+    # Expression : (A + B) * C
+    nodeA = TreeNode("A")
+    nodeB = TreeNode("B")
+    nodeC = TreeNode("C")
+    plus = TreeNode("+", nodeA, nodeB)
+    multiply = TreeNode("*", plus, nodeC)
+
+    et = ExpressionTree()
+    et.root = multiply
+    return et
+
+
+# Test
+et = CreateExpressionTree()
+et.pre_order(et.root)
+
+print("Depth-First Search (DFS) : Parcours en profondeur d'un graphe")
+#version recurssive 
+def dfs_recu(visited_vertices, graph, current_vertex):
+    # Vérifier si le sommet n'a pas encore été visité
+    if current_vertex not in visited_vertices:
+        print(current_vertex)  # Afficher le sommet
+        visited_vertices.add(current_vertex)  # Marquer comme visité
+        # Explorer tous les voisins
+        for adjacent_vertex in graph[current_vertex]:
+            dfs_recu(visited_vertices, graph, adjacent_vertex)
+
+#version iterative en utilisant une pile
+def dfs_iterative(graph, start_vertex):
+    visited_vertices = set()
+    stack = [start_vertex]
+
+    while len(stack) > 0: # Tant que la pile n'est pas vide ou on peut aussi utiliser while stack:
+        current_vertex = stack.pop()  # Retirer le sommet du haut de la pile et le sauvegarder dans current_vertex
+        # Vérifier si le sommet n'a pas encore été visité
+        if current_vertex not in visited_vertices: # Si non visité
+            print(current_vertex) # Afficher le sommet
+            visited_vertices.add(current_vertex)# Marquer comme visité
+            # Ajouter les voisins dans la pile
+            # (on inverse pour garder un ordre similaire au récursif)
+            for adjacent_vertex in graph[current_vertex]:
+                if adjacent_vertex not in visited_vertices:
+                    stack.append(adjacent_vertex)
+
+# Exemple de graphe sous forme de dictionnaire d'adjacence
+graph = {
+    '0': ['1', '2'],
+    '1': ['0', '3', '4'],
+    '2': ['0', '5'],
+    '3': ['1'],
+    '4': ['1', '5'],
+    '5': ['2', '4']
+}
+print("avec une liste, la vérification not in est O(n) au lieu de O(1) avec un set. Donc en pratique, un set est plus efficace.")
+# Test récursif
+print("DFS récursif :")
+dfs_recu(set(), graph, '0')
+print("DFS iterative:")
+dfs_iterative(graph, '0')
