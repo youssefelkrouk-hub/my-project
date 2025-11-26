@@ -286,3 +286,34 @@ print("DFS récursif :")
 dfs_recu(set(), graph, '0')
 print("DFS iterative:")
 dfs_iterative(graph, '0')
+
+
+print("Breadth-First Search (BFS) : Parcours en largeur d'un graphe")
+import queue
+
+def bfs_iterative(graph,initial_vertex):
+    visited_vertices=[]
+    bfs_queue=queue.SimpleQueue()
+    visited_vertices.append(initial_vertex)
+    bfs_queue.put(initial_vertex)
+    while bfs_queue:
+        cuurent_vertex=bfs_queue.get()
+        for adjacent_vertex in graph[cuurent_vertex]:
+            if adjacent_vertex not in visited_vertices:
+                visited_vertices.append(adjacent_vertex)
+                bfs_queue.put(adjacent_vertex)
+    return visited_vertices
+
+# Exemple de graphe sous forme de dictionnaire d'adjacence
+graph = {
+    '0': ['1', '2'],
+    '1': ['0', '3', '4'],
+    '2': ['0', '5'],
+    '3': ['1'],
+    '4': ['1', '5'],
+    '5': ['2', '4']
+}
+# Test BFS
+print("BFS iterative:")
+bfs_result = bfs_iterative(graph, '0')
+print("Ordre de visite BFS :", bfs_result)
